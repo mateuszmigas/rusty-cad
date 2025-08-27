@@ -10,10 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/model-viewer": "^4.1.0",
     "@tailwindcss/vite": "^4.1.12",
+    "opencascade.js": "2.0.0-beta.b5ff984",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "tailwindcss": "^4.1.12"
+    "tailwindcss": "^4.1.12",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "vite-plugin-wasm": "^3.5.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.2",
