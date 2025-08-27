@@ -1,7 +1,7 @@
-import { useEffect, useState, useId } from "react";
-import "@google/model-viewer";
+import { useEffect, useState } from "react";
 import { loadOcct } from "./occt";
 import { visualizeShapes } from "./visualise";
+import { GlbViewer } from "./GlbViewer";
 
 export const App = () => {
 	const [modelUrl, setModelUrl] = useState<string>("");
@@ -9,7 +9,10 @@ export const App = () => {
 
 	useEffect(() => {
 		const init = async () => {
+			console.time("loadOcct");
 			const oc = await loadOcct();
+			console.timeEnd("loadOcct");
+			console.time("createSphere");
 			const sphereSize = 0.65;
 			const box = new oc.BRepPrimAPI_MakeBox_2(1, 1, 1);
 			const sphere = new oc.BRepPrimAPI_MakeSphere_5(
@@ -22,7 +25,10 @@ export const App = () => {
 				new oc.Message_ProgressRange_1(),
 			);
 			cut.Build(new oc.Message_ProgressRange_1());
+			console.timeEnd("createSphere");
+			console.time("visualizeShapes");
 			const url = visualizeShapes(oc, cut.Shape());
+			console.timeEnd("visualizeShapes");
 			console.log(url);
 			setModelUrl(url);
 			setIsLoading(false);
@@ -42,15 +48,7 @@ export const App = () => {
 							</div>
 						</div>
 					) : modelUrl ? (
-						// @ts-ignore
-						<model-viewer
-							src={modelUrl}
-							camera-controls
-							enable-pan
-							style={{ width: "100%", height: "500px" }}
-							auto-rotate
-							shadow-intensity="1"
-						/>
+						<GlbViewer modelUrl={modelUrl} className="h-[500px]" />
 					) : (
 						<div className="flex items-center justify-center h-96">
 							<p className="text-red-600">Failed to load 3D model</p>
