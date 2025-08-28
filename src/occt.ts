@@ -1,7 +1,7 @@
 // import opencascade from "opencascade.js/dist/opencascade.full.js";
 // import opencascadeWasm from "opencascade.js/dist/opencascade.full.wasm?url";
-import opencascadeWasm from "../rocketExample.wasm?url";
-import opencascade from "../rocketExample.js";
+import opencascadeWasm from "../occtCustom.wasm?url";
+import opencascade from "../occtCustom.js";
 
 type Occt = Awaited<ReturnType<typeof opencascade>>;
 
