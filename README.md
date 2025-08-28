@@ -3,6 +3,6 @@
 - `pnpm dev`
 
 # Build custom OCCT
+- `docker pull donalffons/opencascade.js` (if not already pulled)
 - edit `occt.yml`
-- `docker pull donalffons/opencascade.js`
 - `pnpm build:occt`
